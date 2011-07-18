@@ -22,9 +22,10 @@ window.truck = null;
 // Pull the Milktruck model from 3D Warehouse.
 var PAGE_PATH = document.location.href.replace(/\/[^\/]+$/, '/');
 var MODEL_URL =
-  'http://sketchup.google.com/3dwarehouse/download?'
-  + 'mid=3c9a1cac8c73c61b6284d71745f1efa9&rtyp=zip&'
-  + 'fn=milktruck&ctyp=milktruck';
+//  'http://sketchup.google.com/3dwarehouse/download?'
+//  + 'mid=3c9a1cac8c73c61b6284d71745f1efa9&rtyp=zip&'
+//  + 'fn=milktruck&ctyp=milktruck';
+    'http://sketchup.google.com/3dwarehouse/download?mid=3d64ec9ab5ebe37020fc0d1f64d8ea9c&rtyp=zip&fn=Man+Riding+Segway+i2&ctyp=other&prevstart=0&ts=1202486001000';
 var INIT_LOC = {
   lat: 37.423501,
   lon: -122.086744,
