@@ -42,9 +42,9 @@ var GRAVITY = 9.8;
 var CAM_HEIGHT = 6;
 var TRAILING_DISTANCE = 15;
 
-var ACCEL = 50.0;
-var DECEL = 80.0;
-var MAX_REVERSE_SPEED = 40.0;
+var ACCEL = 10.0;
+var DECEL = 20.0;
+var MAX_REVERSE_SPEED = 10.0;
 
 var STEER_ROLL = -1.0;
 var ROLL_SPRING = 0.5;

@@ -8,7 +8,7 @@ $(function() {
         // console.log(axis);
         
         if (axis == "/x") {
-          turnCoefficient = Math.abs(0.5 - val) * 1.3;
+          turnCoefficient = Math.abs(0.5 - val) * 2;
           if (val < 0.46) {
             leftButtonDown = true;
             rightButtonDown = false;
