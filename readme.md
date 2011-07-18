@@ -6,4 +6,4 @@ adapted from:
 
 * http://github.com/catshirt/node-hands
 * http://github.com/automata/node-osc
-
+* http://earth-api-samples.googlecode.com/svn/trunk/demos/milktruck/index.html
