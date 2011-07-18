@@ -1,18 +1,139 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>hands</title>
-        <link rel="stylesheet" href="/webroot/css/style.css" type="text/css" media="screen, projection" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" src="/webroot/js/lib/jquery.ba-dotimeout.min.js"></script>
-        <script type="text/javascript" src="/webroot/js/lib/underscore/underscore-min.js"></script>
-        <script type="text/javascript" src="/webroot/js/lib/backbone/backbone-min.js"></script>
-        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="/webroot/js/models/hand.js"></script>
-        <script type="text/javascript" src="/webroot/js/views/handview.js"></script>
-        <script type="text/javascript" src="/webroot/js/brain.js"></script>
-    </head>
-    <body>
-    </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>hands</title>
+  <link rel="stylesheet" href="/webroot/css/style.css" type="text/css" media="screen, projection" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="/webroot/js/lib/jquery.ba-dotimeout.min.js"></script>
+  <script type="text/javascript" src="/webroot/js/lib/underscore/underscore-min.js"></script>
+  <script type="text/javascript" src="/webroot/js/lib/backbone/backbone-min.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <!-- <script type="text/javascript" src="/webroot/js/models/hand.js"></script> -->
+  <!-- <script type="text/javascript" src="/webroot/js/views/handview.js"></script> -->
+  <script type="text/javascript" src="/webroot/js/brain.js"></script>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+  <!--
+  Copyright 2008 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  --> 
+  <title>Monster Milktruck!</title> 
+  <link rel=stylesheet href='http://earth-api-samples.googlecode.com/svn/trunk/demos/milktruck/milktruck.css' type='text/css' /> 
+  <!-- *** Replace the key below below with your own API key, available at http://code.google.com/apis/maps/signup.html *** --> 
+  <script src="http://www.google.com/jsapi?key=ABQIAAAAwbkbZLyhsmTCWXbTcjbgbRSzHs7K5SvaUdm8ua-Xxy_-2dYwMxQMhnagaawTo7L1FE1-amhuQxIlXw"></script> 
+  <script type="text/javascript" src="http://earth-api-samples.googlecode.com/svn/trunk/lib/math3d.js"></script> 
+  <script type="text/javascript" src="http://earth-api-samples.googlecode.com/svn/trunk/lib/keyboard-focus-hack.js"></script> 
+  <script type="text/javascript" src="http://earth-api-samples.googlecode.com/svn/trunk/lib/kmldomwalk.js"></script> 
+  <script type="text/javascript" src="http://earth-api-samples.googlecode.com/svn/trunk/demos/milktruck/milktruck.js"></script> 
+  <script type="text/javascript"> 
+  google.load("earth", "1");
+  google.load("maps", "2");
+
+  var ge = null;
+  var geocoder;
+  var truck;
+
+  function el(e) { return document.getElementById(e); }
+
+  function Sample(description, url) {
+    this.description = description;
+    this.url = url;
+    return this;
+  }
+
+  var samples = [];
+
+  function init() {
+    geocoder = new GClientGeocoder();
+
+    init3D();
+  }
+
+  function initCallback(object) {
+    ge = object;
+    ge.getWindow().setVisibility(true);
+    ge.getLayerRoot().enableLayerById(ge.LAYER_BUILDINGS, true);
+    ge.getOptions().setFlyToSpeed(ge.SPEED_TELEPORT);
+
+    truck = new Truck();
+
+    keyboardFocusHack(ge);
+  }
+
+  function failureCallback(err) {
+    /***
+    * This function will be called if plugin fails to load, in case
+    * you need to handle that error condition.
+    ***/
+  }
+
+  function init3D() {
+    google.earth.createInstance("map3d", initCallback, failureCallback);
+  }
+
+  function submitLocation() {
+    doGeocode(el('address').value);
+  }
+
+  function doGeocode(address) {
+    geocoder.getLatLng(address, function(point) {
+      if (point) {
+        if (ge != null && truck != null) {
+          truck.teleportTo(point.y, point.x);
+        }
+      }
+    });
+  }
+
+  </script> 
+</head> 
+<body onload='init()' onunload="GUnload()" onKeyDown="return keyDown(event);" onKeyUp="return keyUp(event);"> 
+  <center> 
+    <div class="title"> 
+      <center> 
+        <i>MONSTER MILKTRUCK!</i> 
+      </center> 
+    </div> 
+
+    <div id='map3d'></div> 
+
+    <table> 
+      <tr> 
+        <td> 
+          To drive: use the buttons, or keyboard arrows (with focus on page).
+
+          <div> 
+            <form name='searchform' id='searchform' action='javascript:submitLocation();void(0);'> 
+              <input type=text size=60 id='address' value='(enter a location to go there)'></input> 
+              <input type=submit value='Teleport!'> 
+            </form> 
+
+            Presets:
+            <input type=button value="Th' Plex" onclick="truck.teleportTo(37.423501,-122.086744,90);"> 
+            <input type=button value="San Francisco" onclick="doGeocode('San Francisco');"> 
+            <input type=button value="Whistler" onclick="truck.teleportTo(50.085734,-122.855824,220);"> 
+            <input type=button value="Pismo" onclick="truck.teleportTo(35.040675,-120.629513,170);"> 
+            <input type=button value="Tokyo" onclick="truck.teleportTo(35.668607,139.822026,180);"> 
+            <input type=button value="Everest" onclick="truck.teleportTo(27.991283,86.924340,70);"> 
+          </div> 
+
+
+        </td> 
+      </tr> 
+    </table> 
+  </center> 
+
+</body>
 </html>
