@@ -8,10 +8,11 @@ $(function() {
         // console.log(axis);
         
         if (axis == "/x") {
-          if (val < 0.48) {
+          turnCoefficient = Math.abs(0.5 - val) * 1.3;
+          if (val < 0.46) {
             leftButtonDown = true;
             rightButtonDown = false;
-          } else if (val > 0.52) {
+          } else if (val > 0.54) {
             leftButtonDown = false;
             rightButtonDown = true;
           } else {
@@ -19,6 +20,7 @@ $(function() {
             rightButtonDown = false;
           }
         } else if (axis == '/y') {
+          accelCoefficient = Math.abs(0.5 - val) * 2;
           if (val < 0.48) {
             gasButtonDown = false;
             reverseButtonDown = true;
