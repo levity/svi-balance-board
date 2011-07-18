@@ -39,8 +39,8 @@ var BALLOON_FG = '#000000';
 var BALLOON_BG = '#FFFFFF';
 
 var GRAVITY = 9.8;
-var CAM_HEIGHT = 10;
-var TRAILING_DISTANCE = 50;
+var CAM_HEIGHT = 6;
+var TRAILING_DISTANCE = 15;
 
 var ACCEL = 50.0;
 var DECEL = 80.0;
@@ -129,7 +129,7 @@ Truck.prototype.finishInit = function(kml) {
   me.shadow.setAltitudeMode(ge.ALTITUDE_CLAMP_TO_SEA_FLOOR);
   me.shadow.getIcon().setHref('http://earth-api-samples.googlecode.com/svn/trunk/demos/milktruck/shadowrect.png');
   me.shadow.setVisibility(true);
-  ge.getFeatures().appendChild(me.shadow);
+  // ge.getFeatures().appendChild(me.shadow);
 
   google.earth.addEventListener(ge, "frameend", function() { me.tick(); });
 
