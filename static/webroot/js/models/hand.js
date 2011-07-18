@@ -21,7 +21,17 @@ $(function() {
             this.view = new HandView(this);
             
             Socket.on('message', function(d) {
-                parse_message.call(self, d, defaults, id);
+                var data = eval('(' + d + ')');
+                var axis = data[0], val = data[1];
+                // console.log(axis);
+                
+                if (axis == "/x") {
+                  self.set({x: val});
+                } else if (axis == '/y') {
+                  self.set({y: val});
+                }
+                
+                // parse_message.call(self, d, defaults, id);
             });
             
         }

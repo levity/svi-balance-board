@@ -1,8 +1,6 @@
 $(function() {
     
-    window.Socket = new io.Socket();
-    
-    Socket.connect();
+    window.Socket = io.connect('http://localhost:8081');
     
     new Hand({
         id: 'left'
