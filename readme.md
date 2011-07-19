@@ -5,6 +5,9 @@ http://www.youtube.com/watch?v=Jnsxsn2CZFo
 
 Wii Fit Balance Board -> [Osculator](http://www.osculator.net) -> this (node server.js)
 
+Writeup:
+http://www.quora.com/Stormy-Shippy/Virtual-Segway-tours-with-a-Wii-Fit-balance-board
+
 adapted from:
 
 * http://github.com/catshirt/node-hands
