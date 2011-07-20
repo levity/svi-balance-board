@@ -31,7 +31,7 @@ io.sockets.on('connection', function(socket) {
   var dgram = require('dgram'),
     osc_serv = dgram.createSocket('udp4')
 
-  // parse the message from bionic dj
+  // parse the message from Osculator client
   // not really doing any determination via OSC spec
   // just dumb-parsing the buffer
   osc_serv.on('message', function (msg, a) {
@@ -40,7 +40,10 @@ io.sockets.on('connection', function(socket) {
     socket.send(json);
   })
 
-  // listen for incoming messages from bionic dj
+  // listen for incoming messages from Osculator client
+  // be sure to set port and IP address to where your
+  // Osculator client routes OSC messages.
+  // Don't use default values.
   osc_serv.bind(60000, '10.22.35.95')
 
 });
